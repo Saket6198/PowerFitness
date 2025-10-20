@@ -6,8 +6,12 @@ import {
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Animated, { FadeInDown } from 'react-native-reanimated';
+import { useRouter } from "expo-router";
+
 
 const index = () => {
+  const router = useRouter();
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-1">
@@ -23,7 +27,7 @@ const index = () => {
           end={{ x: 0.5, y: 0.8 }}
           className="flex justify-end pb-12 space-y-8"
         >
-          <View
+          <Animated.View entering={FadeInDown.delay(200).springify()}
             className="flex justify-center items-center"
           >
             <Text
@@ -38,9 +42,10 @@ const index = () => {
             >
               for you
             </Text>
-          </View>
-          <View>
+          </Animated.View>
+          <Animated.View entering={FadeInDown.delay(400).springify()}>
             <TouchableOpacity
+              onPress={() => router.replace("/home")}
               style={{ width: wp(60), height: hp(7) }}
               className=" bg-rose-500 flex justify-center items-center mx-auto border-white rounded-xl mt-5"
             >
@@ -51,7 +56,7 @@ const index = () => {
                 Get Started
               </Text>
             </TouchableOpacity>
-          </View>
+          </Animated.View>
         </LinearGradient>
       </View>
     </SafeAreaView>

@@ -3,7 +3,7 @@ import axios from "axios";
 const apiCall = async (bodyPart: string) => {
   const options = {
     method: "GET",
-    url: `https://www.exercisedb.dev/api/v1/bodyparts/${encodeURIComponent(bodyPart)}/exercises`,
+    url: `https://www.exercisedb.dev/api/v1/bodyparts/${bodyPart}/exercises?offset=0&limit=50`,
   };
 
   try {

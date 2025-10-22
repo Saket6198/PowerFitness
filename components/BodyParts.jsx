@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import {
     heightPercentageToDP as hp,
     widthPercentageToDP as wp,
@@ -25,7 +26,7 @@ const BodyParts = () => {
 
 const BodyPartCard = ({ item, index, router }) => {
     return (
-        <View>
+        <Animated.View entering={FadeInDown.duration(200).delay(index*200).springify()}>
             <TouchableOpacity
                 onPress={() => router.push({
                     pathname: '/exercises/[name]',
@@ -51,7 +52,7 @@ const BodyPartCard = ({ item, index, router }) => {
                     {item.name}
                 </Text>
             </TouchableOpacity>
-        </View>
+        </Animated.View>
     );
 }
 

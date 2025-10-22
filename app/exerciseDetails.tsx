@@ -4,6 +4,7 @@ import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import {
   heightPercentageToDP,
   widthPercentageToDP,
@@ -23,7 +24,7 @@ const exerciseDetails = () => {
   };
 
   // console.log(item);
-  
+
   return (
     <Modal
       isVisible={isVisible}
@@ -41,7 +42,9 @@ const exerciseDetails = () => {
           <TouchableOpacity activeOpacity={1}>
             <View className="shadow-md bg-neutral-200 rounded-b-[40px]">
               <Image
-                source={{ uri: item?.gifUrl || "https://via.placeholder.com/150" }}
+                source={{
+                  uri: item?.gifUrl || "https://via.placeholder.com/150",
+                }}
                 className="rounded-b-[40px]"
                 style={{
                   width: widthPercentageToDP(100),
@@ -61,49 +64,81 @@ const exerciseDetails = () => {
               </TouchableOpacity>
             </View>
             <View className="mt-4 space-y-2 mx-4 mb-10">
-              <Text
-                style={{ fontSize: heightPercentageToDP(3.5) }}
-                className="font-semibold text-black tracking-wide"
+              <Animated.View
+                entering={FadeInDown.duration(400).delay(100).springify()}
               >
-                {item?.name}{" "}
-              </Text>
-              <Text
-                style={{ fontSize: heightPercentageToDP(2.2) }}
-                className="text-gray-700 mt-2"
+                <Text
+                  style={{ fontSize: heightPercentageToDP(3.5) }}
+                  className="font-semibold text-black tracking-wide"
+                >
+                  {item?.name}{" "}
+                </Text>
+              </Animated.View>
+
+              <Animated.View
+                entering={FadeInDown.duration(400).delay(200).springify()}
               >
-                Equipment: <Text className="font-bold">{item?.equipments} </Text>
-              </Text>
-              <Text
-                style={{ fontSize: heightPercentageToDP(2.2) }}
-                className="text-gray-700"
+                <Text
+                  style={{ fontSize: heightPercentageToDP(2.2) }}
+                  className="text-gray-700 mt-2"
+                >
+                  Equipment:{" "}
+                  <Text className="font-bold">{item?.equipments} </Text>
+                </Text>
+              </Animated.View>
+
+              <Animated.View
+                entering={FadeInDown.duration(400).delay(300).springify()}
               >
-                Secondary Muscles:{" "}
-                <Text className="font-bold">{item?.secondaryMuscles} </Text>
-              </Text>
-              <Text
-                style={{ fontSize: heightPercentageToDP(2.2) }}
-                className="text-gray-700"
+                <Text
+                  style={{ fontSize: heightPercentageToDP(2.2) }}
+                  className="text-gray-700"
+                >
+                  Secondary Muscles:{" "}
+                  <Text className="font-bold">{item?.secondaryMuscles} </Text>
+                </Text>
+              </Animated.View>
+
+              <Animated.View
+                entering={FadeInDown.duration(400).delay(400).springify()}
               >
-                Target Muscle:{" "}
-                <Text className="font-bold">{item?.targetMuscles} </Text>
-              </Text>
-              <Text
-                style={{ fontSize: heightPercentageToDP(3) }}
-                className="text-gray-700 mt-2"
+                <Text
+                  style={{ fontSize: heightPercentageToDP(2.2) }}
+                  className="text-gray-700"
+                >
+                  Target Muscle:{" "}
+                  <Text className="font-bold">{item?.targetMuscles} </Text>
+                </Text>
+              </Animated.View>
+
+              <Animated.View
+                entering={FadeInDown.duration(400).delay(500).springify()}
               >
-                Instructions
-              </Text>
+                <Text
+                  style={{ fontSize: heightPercentageToDP(3) }}
+                  className="text-gray-700 mt-2"
+                >
+                  Instructions
+                </Text>
+              </Animated.View>
+
               {item?.instructions
                 ?.split(".")
                 .filter((step) => step.trim())
                 .map((step, index) => (
-                  <Text
+                  <Animated.View
                     key={index}
-                    style={{ fontSize: heightPercentageToDP(2) }}
-                    className="text-gray-600 tracking-wide mb-1"
+                    entering={FadeInDown.duration(400)
+                      .delay((index + 6) * 100)
+                      .springify()}
                   >
-                    {step.trim()}
-                  </Text>
+                    <Text
+                      style={{ fontSize: heightPercentageToDP(2) }}
+                      className="text-gray-600 tracking-wide mb-1"
+                    >
+                      {step.trim()}
+                    </Text>
+                  </Animated.View>
                 ))}
             </View>
           </TouchableOpacity>

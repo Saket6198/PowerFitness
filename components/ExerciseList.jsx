@@ -9,11 +9,31 @@ import {
 
 const ExerciseList = ({ data }) => {
     const router = useRouter();
+    if (!Array.isArray(data)) {
+        return (
+            <View className='mx-4'>
+                <Text className="text-center text-gray-500 mt-4">
+                    No exercises found
+                </Text>
+            </View>
+        );
+    }
+
+    if (data.length === 0) {
+        return (
+            <View className='mx-4'>
+                <Text className="text-center text-gray-500 mt-4">
+                    No exercises available
+                </Text>
+            </View>
+        );
+    }
+
     return (
         <View className='mx-4'>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
                 {data.map((item, index) => (
-                    <ExerciseCard key={item.exerciseId} index={index} item={item} router={router} />
+                    <ExerciseCard key={item.id || item.exerciseId || index} index={index} item={item} router={router} />
                 ))}
             </View>
         </View>
@@ -22,7 +42,7 @@ const ExerciseList = ({ data }) => {
 
 const ExerciseCard = ({ item, index, router }) => {
     return (
-        <Animated.View entering={FadeInDown.duration(400).delay(index*200).springify()} style={{ width: wp(44) }} className="mb-4">
+        <Animated.View entering={FadeInDown.duration(400).delay(index * 200).springify()} style={{ width: wp(44) }} className="mb-4">
             <TouchableOpacity onPress={() => router.push({ pathname: '/exerciseDetails', params: item })} className="flex space-y-2">
                 {/* Image Container */}
                 <View className='bg-neutral-200 shadow rounded-3xl'>

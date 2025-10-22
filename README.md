@@ -33,6 +33,7 @@ A **production-grade** React Native fitness application built with cutting-edge 
 - **Context-based state management**
 
 ## 🎨 UI/UX Excellence
+![github](https://github.com/user-attachments/assets/b15154e3-88ed-4f7a-8075-2dbc665dc863)
 
 Find the source, report issues, or contribute via the repository above.
 

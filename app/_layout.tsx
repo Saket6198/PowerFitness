@@ -22,8 +22,10 @@ export default function RootLayout() {
         <JsStack.Screen
           name="exerciseDetails"
           options={{
-            ...TransitionPresets.ModalPresentationIOS,
-            presentation: "modal",
+            headerShown: false,
+            presentation: "transparentModal", // Changed to transparentModal
+            cardStyle: { backgroundColor: 'transparent' }, // Make card transparent
+            gestureEnabled: false, // Disable native gesture since modal handles it
           }}
         />
       </JsStack>
